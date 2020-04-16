@@ -1,0 +1,27 @@
+<head>
+
+</head>
+
+<body>
+  <h1>Stuff I need to do</h1>
+  <ul></ul>
+
+  <script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+
+    const ul = document.querySelector('ul');
+    
+    ipcRenderer.on('todo:add', (event, todo) => {
+      const li = document.createElement('li');
+      const text = document.createTextNode(todo);
+
+      li.appendChild(text);
+      ul.appendChild(li);
+    });
+
+    ipcRenderer.on('todo:clear', () => {
+      ul.innerHTML="";
+    });
+  </script>
+</body>
